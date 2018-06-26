@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   APP_LOAD,
   REDIRECT,
@@ -9,7 +10,7 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'Tukang Jait',
+  appName: 'tukang jait',
   token: null,
   viewChangeCounter: 0
 };

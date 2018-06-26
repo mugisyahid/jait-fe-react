@@ -1,17 +1,25 @@
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import React from 'react';
-import { store, history} from './store';
+import { store, history } from './store';
 
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
-import App from "./component/App";
+import indexRoutes from "./routes/index";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./assets/css/animate.min.css";
+import "./assets/sass/light-bootstrap-dashboard.css?v=1.2.0";
+import "./assets/css/demo.css";
+import "./assets/css/pe-icon-7-stroke.css";
 
 ReactDOM.render((
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <Switch>
-                <Route path="/" component={App} />
+                {indexRoutes.map((prop, key) => {
+                    return <Route to={prop.path} component={prop.component} key={key} />;
+                })}
             </Switch>
         </ConnectedRouter>
     </Provider>

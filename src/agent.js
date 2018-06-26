@@ -1,10 +1,11 @@
+/* eslint-disable */
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
 import {API_LOGIN} from "./constants/api";
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = process.env.NODE_ENV === 'production'? 'https://bukan-bengkam.herokuapp.com' : 'http://localhost:8080';
+const API_ROOT = process.env.NODE_ENV === 'production'? 'https://bukan-bengkam.herokuapp.com' : 'http://localhost:3000';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;

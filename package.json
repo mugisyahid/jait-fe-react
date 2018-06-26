@@ -7,6 +7,7 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "bootstrap": "3.3.7",
     "history": "^4.6.3",
     "marked": "^0.3.6",
     "prop-types": "^15.5.10",
@@ -20,12 +21,25 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.1",
     "superagent": "^2.3.0",
-    "superagent-promise": "^1.1.0"
+    "superagent-promise": "^1.1.0",
+    "chartist": "0.10.1",
+    "node-sass": "4.6.1",
+    "node-sass-chokidar": "0.0.3",
+    "npm-run-all": "4.1.2",
+    "react-bootstrap": "0.32.1",
+    "react-chartist": "0.13.1",
+    "react-google-maps": "9.4.5",
+    "react-notification-system": "0.2.17",
+    "react-scripts": "1.1.1",
+    "cross-env": "^4.0.0"
   },
   "scripts": {
-    "start": "cross-env PORT=4101 react-scripts start",
-    "build": "react-scripts build",
-    "test": "cross-env PORT=4101 react-scripts test --env=jsdom",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "start-js": "cross-env PORT=4001 react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm run build-css && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
 }
