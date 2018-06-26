@@ -39,8 +39,13 @@ const Auth = {
         requests.put('/user', { user })
 };
 
+const Ticket = {
+  getTicket: () => requests.get('/ticket')
+}
+
 
 export default {
     Auth,
+    Ticket,
     setToken: _token => { token = _token; }
 };

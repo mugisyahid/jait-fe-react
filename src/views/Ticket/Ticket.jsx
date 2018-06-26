@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 
@@ -6,13 +7,50 @@ import { thArray, tdArray } from "../../variables/Variables.jsx";
 
 import Button from "../../components/CustomButton/CustomButton.jsx";
 
+import agent from '../../agent';
+import { connect } from 'react-redux';
+
+import {
+  TICKET_PAGE_UNLOADED,
+  GET_TICKET,
+  SEARCH_TICKET
+} from '../../constants/actionTypes';
+
+const mapStateToProps = state => ({ ...state, tickets: state.ticket.tickets });
+const mapDispatchToProps = dispatch => ({
+  onLoad: (payload) =>
+    dispatch({ type: GET_TICKET, payload }),
+  onSearchTicket: value =>
+    dispatch({ type: SEARCH_TICKET }),
+  onUnload: () =>
+    dispatch({ type: TICKET_PAGE_UNLOADED })
+});
 
 class Ticket extends Component {
+
+  componentWillMount() {
+    this.props.onLoad(Promise.all([agent.Ticket.getTicket()]))
+  }
+  componentWillUnmount() {
+    this.props.onUnload();
+  }
   render() {
+    if (!this.props.tickets) {
+      return null;
+    }
+    console.log(this.props.tickets)
+    let arrayTicket = []
+    this.props.tickets[0].forEach((ticket, idx) => {
+      let arr = []
+      arr[0] = ticket.ID
+      arr[1] = ticket.TICKET_ID
+      arrayTicket[idx] = arr
+    });
+    console.log(arrayTicket)
     return (
       <div className="content">
-        <div class="row col-md-12">
-          <Button bsStyle="info" pullLeft fill type="submit">
+        <div className="col-md-12" style={{marginBottom: 15 + 'px'}}>
+          <Button bsStyle="info" fill type="submit">
             New Ticket
         </Button>
         </div>
@@ -35,7 +73,7 @@ class Ticket extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {tdArray.map((prop, key) => {
+                    {arrayTicket.map((prop, key) => {
                         return (
                           <tr key={key}>
                             {prop.map((prop, key) => {
@@ -56,4 +94,4 @@ class Ticket extends Component {
   }
 }
 
-export default Ticket;
+export default connect(mapStateToProps, mapDispatchToProps)(Ticket);

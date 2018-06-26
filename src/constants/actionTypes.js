@@ -9,3 +9,8 @@ export const REGISTER_PAGE_UNLOADED = 'REGISTER_PAGE_UNLOADED';
 export const ASYNC_START = 'ASYNC_START';
 export const ASYNC_END = 'ASYNC_END';
 export const UPDATE_FIELD_AUTH = 'UPDATE_FIELD_AUTH';
+// ticket
+export const TICKET_PAGE_UNLOADED = 'TICKET_PAGE_UNLOADED';
+export const GET_TICKET = 'GET_TICKET';
+export const SEARCH_TICKET = 'SEARCH_TICKET';
+
